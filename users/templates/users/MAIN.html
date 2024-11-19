@@ -1,0 +1,9 @@
+{% include "navbar.html" %}
+{% block content %}
+    <h1>Welcome to the Application</h1>
+    <p>Please choose an option below:</p>
+    <div class="button-container">
+        <a href="{% url 'create-account' %}" class="button">Sign Up</a>
+        <a href="{% url 'login-account' %}" class="button button-login">Login</a>
+    </div>
+{% endblock content %}

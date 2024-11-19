@@ -1,0 +1,47 @@
+{% extends "index.html" %}
+{% block content %}
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Public Complaints</title>
+  </head>
+  <body>
+
+      <!-- Button to add a new complaint -->
+      <div style="text-align: center; margin-bottom: 20px;">
+          <a href="{% url 'create_complaint' %}" class="btn btn-primary">Add Complaint</a>
+      </div>
+
+      <h2 style="text-align: center;">All Complaints</h2>
+
+      <!-- Display complaints in a table -->
+      <table border="1" cellpadding="10" cellspacing="0" style="width: 80%; margin: 0 auto; text-align: left;">
+          <thead>
+              <tr>
+                  <th>Complaint ID</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Submitted By</th>
+                  <th>Status</th>
+                  <th>Date</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for complaint in complaints %}
+                  <tr>
+                      <td>{{ complaint.complaint_id }}</td>
+                      <td>{{ complaint.complaint_title }}</td>
+                      <td>{{ complaint.complaint_description }}</td>
+                      <td>{{ complaint.complaint_user.name }}</td>
+                      <td>{{ complaint.complaint_status|yesno:"Resolved,Pending" }}</td>
+                      <td>{{ complaint.complaint_date }}</td>
+                  </tr>
+              {% empty %}
+                  <tr>
+                      <td colspan="6" style="text-align: center;">No complaints available.</td>
+                  </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+  </body>
+{% endblock content %}
