@@ -27,7 +27,7 @@
                   <th>Submitted By</th>
                   <th>Status</th>
                   <th>Date</th>
-                  <th>View</th>
+                  <th>Update Status</th>
               </tr>
           </thead>
           <tbody>
@@ -40,7 +40,7 @@
                       <td>{{ complaint.complaint_user.name }}</td>
                       <td>{{ complaint.complaint_status|yesno:"Resolved,Pending" }}</td>
                       <td>{{ complaint.complaint_date }}</td>
-                      <td><a href="{% url 'view_single_complaint' complaint.complaint_id %}" class="btn btn-info">View Complaint</a></td>
+                      <td><a href="{% url 'update_official_dashboard' complaint.complaint_id %}" class="btn btn-info">Update Status</a></td>
                   </tr>
               {% empty %}
                   <tr>

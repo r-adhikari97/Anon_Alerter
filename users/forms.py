@@ -14,15 +14,11 @@ class SignUpForm(ModelForm):
         fields = ["name", "email", "phone", "password"]
 
 
-class LoginForm(ModelForm):
+class LoginForm(forms.Form):
     """ Class Validating Login Data"""
 
     ## Password Settings
-    password = forms.CharField(
-        widget=forms.PasswordInput(),
-        required=True
-    )
+    email = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
 
-    class Meta:
-        model = User
-        fields = ["email", "password"]
+

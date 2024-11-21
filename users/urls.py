@@ -9,5 +9,6 @@ urlpatterns = [
     ## USER HANDLING
     path("create-account/", create_account, name="create-account"),
     path("login-account/", login_user, name="login-account"),
+    path("logout-account/", logout_user, name="logout-account" )
 
 ]

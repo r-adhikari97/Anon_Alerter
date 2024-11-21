@@ -1,9 +1,15 @@
 {% include "navbar.html" %}
 {% block content %}
   <h1>Login</h1>
-  <form method="post" action="">
+  <form method="post" action="{% url 'login-account' %}">
       {% csrf_token %}
       {{ form.as_p }}
-      <button type="submit">Sign Up</button>
+      <button type="submit">Login Up</button>
   </form>
+
+  <!-- Sign Up Button -->
+  <div style="margin-top: 20px; text-align: center;">
+      <p>Don't have an account?</p>
+      <a href="{% url 'create-account' %}" class="btn btn-secondary">Sign Up</a>
+  </div>
 {% endblock content %}

@@ -4,6 +4,8 @@ from .forms import ComplaintForm
 from .models import PublicComplaint
 
 # Create your views here.
+
+################# USERS #########################
 @login_required
 def create_complaint(request):
     """ Handle creating a public complaint """
@@ -32,3 +34,30 @@ def view_complaint_dashboard(request):
     context = {"complaints":complaints}
     return render(request, "complaints/complaint_dashboard.html",context)
 
+
+@login_required
+def view_single_complaint(request, pk):
+    complaint = PublicComplaint.objects.get(pk=pk)
+    context = {"complaint":complaint}
+    return render(request, "complaints/single_complaint.html", context)
+
+
+################# SPECIAL OFFICIAL  #########################
+@login_required
+def view_official_complaint_dashboard(request):
+    complaints = PublicComplaint.objects.all()
+    context = {"complaints":complaints}
+    return render(request, "complaints/official_complaint_dashboard.html",context)
+
+
+@login_required
+def update_official_complaint(request, pk):
+    complaint = PublicComplaint.objects.get(pk=pk)
+
+    if request.method == "GET":
+        complaint.complaint_status = not complaint.complaint_status
+        complaint.save()
+        return redirect("view_official_dashboard")
+
+    context = {"complaint":complaint}
+    return render(request, "complaints/official_complaint_dashboard.html",context)

@@ -6,4 +6,10 @@
       {{ form.as_p }}
       <button type="submit">Sign Up</button>
   </form>
+
+  <!-- Login Up Button -->
+  <div style="margin-top: 20px; text-align: center;">
+      <p>Have an account?</p>
+      <a href="{% url 'login-account' %}" class="btn btn-secondary">Login</a>
+  </div>
 {% endblock content %}
