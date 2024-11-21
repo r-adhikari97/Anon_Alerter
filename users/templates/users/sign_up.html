@@ -1,15 +1,136 @@
-{% include "navbar.html" %}
+{% extends "index.html" %}
+{% load static %}
 {% block content %}
-  <h1>Sign Up</h1>
-  <form method="post" action="">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit">Sign Up</button>
-  </form>
+  <div class="form-container">
+      <h1 class="form-heading">Sign Up</h1>
+      <form method="post" action="" class="signup-form">
+          {% csrf_token %}
 
-  <!-- Login Up Button -->
-  <div style="margin-top: 20px; text-align: center;">
-      <p>Have an account?</p>
-      <a href="{% url 'login-account' %}" class="btn btn-secondary">Login</a>
+          <!-- Name Field -->
+          <div class="form-group">
+              <label for="{{ form.name.id_for_label }}" class="form-label">{{ form.name.label }}</label>
+              {{ form.name }}
+          </div>
+
+          <!-- Email Field -->
+          <div class="form-group">
+              <label for="{{ form.email.id_for_label }}" class="form-label">{{ form.email.label }}</label>
+              {{ form.email }}
+          </div>
+
+          <!-- Phone Field -->
+          <div class="form-group">
+              <label for="{{ form.phone.id_for_label }}" class="form-label">{{ form.phone.label }}</label>
+              {{ form.phone }}
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-group">
+              <label for="{{ form.password.id_for_label }}" class="form-label">{{ form.password.label }}</label>
+              {{ form.password }}
+          </div>
+
+          <button type="submit" class="btn-submit">Sign Up</button>
+
+          <!-- Already Have an Account Link -->
+          <div class="login-redirect">
+              <p class="login-text">Already have an account?</p>
+              <a href="{% url 'login-account' %}" class="btn-login">Login</a>
+          </div>
+      </form>
   </div>
+
+  <style>
+    /* Center the form on the page */
+    .form-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .form-heading {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: white; /* Sign Up text color changed to white */
+        font-weight: bold; /* Made Sign Up text bold */
+    }
+
+    .signup-form {
+        width: 100%;
+        max-width: 400px;
+        background-color: #f9f9f9;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-size: 1.1rem;
+        color: #333;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+        font-size: 1rem;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #4a90e2;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1rem;
+        background-color: #4a90e2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-submit:hover {
+        background-color: #357ab7;
+    }
+
+    .login-redirect {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .login-redirect p {
+        font-size: 1rem;
+    }
+
+    .login-text {
+        color: black; /* Making the 'Already have an account?' text black */
+    }
+
+    .btn-login {
+        font-size: 1rem;
+        color: #4a90e2;
+        text-decoration: none;
+    }
+
+    .btn-login:hover {
+        text-decoration: underline;
+    }
+  </style>
 {% endblock content %}

@@ -1,50 +1,124 @@
 <!-- templates/complaints/create_complaint.html -->
-{% include "navbar.html" %}
+{% extends "index.html" %}
 {% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create a Complaint</title>
-</head>
-<body>
+    <style>
+        body {
+            background-color: #f4f7fc;
+            font-family: 'Arial', sans-serif;
+        }
 
-    <!-- Heading -->
-    <div style="text-align: center; margin-bottom: 20px;">
-        <h2>Create a New Complaint</h2>
-    </div>
+        .container {
+            width: 30%;  /* Further reduced width */
+            margin: 50px auto;
+            padding: 15px;  /* Reduced padding */
+            background-color: #ffffff;
+            border-radius: 8px;  /* Slightly smaller border radius */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.3rem;  /* Smaller font size for the heading */
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .form-group {
+            margin-bottom: 10px;  /* Reduced margin between fields */
+        }
+
+        label {
+            display: block;
+            font-size: 0.9rem;  /* Smaller label font size */
+            color: #34495e;
+            margin-bottom: 4px;  /* Reduced margin between label and input */
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;  /* Reduced padding */
+            font-size: 0.9rem;  /* Smaller input font size */
+            border: 1px solid #ddd;
+            border-radius: 6px;  /* Slightly smaller border radius */
+            background-color: #f9f9f9;
+            margin-bottom: 8px;  /* Reduced margin */
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: white;
+            padding: 6px 15px;  /* Smaller button padding */
+            border-radius: 6px;  /* Smaller border radius */
+            font-size: 0.9rem;  /* Smaller font size */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secondary {
+            background-color: #95a5a6;
+            color: white;
+            padding: 6px 15px;  /* Smaller button padding */
+            border-radius: 6px;  /* Smaller border radius */
+            font-size: 0.9rem;  /* Smaller font size */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background-color: #7f8c8d;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 11px;  /* Smaller error message font size */
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+
+<div class="container">
+    <h2>Create a New Complaint</h2>
 
     <!-- Complaint form -->
-    <div style="width: 60%; margin: 0 auto;">
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
 
-            <!-- Loop over form fields dynamically -->
-            {% for field in form %}
-                <div style="margin-bottom: 15px;">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}  <!-- Renders the form field (input, textarea, etc.) -->
+        <!-- Loop over form fields dynamically -->
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}  <!-- Renders the form field (input, textarea, etc.) -->
 
-                    <!-- Display errors if the field has any -->
-                    {% if field.errors %}
-                        <div style="color: red; font-size: 12px;">
-                            {% for error in field.errors %}
-                                <p>{{ error }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                </div>
-            {% endfor %}
-
-            <!-- Submit Button -->
-            <div style="text-align: center;">
-                <button type="submit" class="btn btn-primary">Submit Complaint</button>
+                <!-- Display errors if the field has any -->
+                {% if field.errors %}
+                    <div class="error-message">
+                        {% for error in field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
-        </form>
-    </div>
+        {% endfor %}
 
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="{% url 'complaint-dashboard' %}" class="btn btn-secondary">Back to Complaints List</a>
-    </div>
+        <!-- Submit Button -->
+        <div style="text-align: center;">
+            <button type="submit" class="btn-primary">Submit Complaint</button>
+        </div>
+    </form>
 
-</body>
+    <!-- Link back to complaints list -->
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="{% url 'complaint-dashboard' %}" class="btn-secondary">Back to Complaints List</a>
+    </div>
+</div>
+
 {% endblock content %}

@@ -8,6 +8,7 @@ urlpatterns = [
 
     ## OFFICIAL
     path("official/", view=view_official_complaint_dashboard, name="view_official_dashboard"),
-    path("official/<str:pk>", view=update_official_complaint, name="update_official_dashboard")
+    path("official/update/<str:pk>", view=update_official_complaint, name="update_official_dashboard"),
+    path("official/<str:pk>", view=view_single_official_complaint, name="view_single_official_complaint")
 
 ]

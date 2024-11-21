@@ -33,7 +33,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     """Main User Class"""
     email = models.EmailField(blank=True, default="", unique=True)
     name = models.CharField(max_length=255, blank=True, default='')
-    phone = models.CharField(max_length=10, blank=True, null=True, default='XXXXXXXXXX')
+    phone = models.CharField(max_length=10, blank=True, null=True)
 
     # ROLES based rules
     is_active = models.BooleanField(default=True)

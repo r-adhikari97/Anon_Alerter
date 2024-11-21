@@ -1,13 +1,73 @@
-{% include "navbar.html" %}
+<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Civil Administration{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0; /* Remove any padding */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure full viewport height */
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            cursor: pointer; /* Makes the title look clickable */
+        }
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            margin-top: auto; /* Pushes footer to the bottom */
+        }
+        .main-content {
+            width: 100%;
+            flex: 1; /* Allow the content area to grow and fill remaining space */
+            background-image: url('{% static "images/background.jpg" %}');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
+    <script>
+        function navigateToViewMain() {
+            window.location.href = "{% url 'view-main' %}";
+        }
+    </script>
 </head>
 <body>
-  {% block content %}
+    <header>
+        <h1 onclick="navigateToViewMain()">Civil Administration</h1>
+        {% if user.is_authenticated %}
+            <div style="position: fixed; top: 20px; right: 20px;">
+                <a href="{% url 'logout-account' %}" class="btn btn-danger">Logout</a>
+            </div>
+        {% endif %}
+    </header>
 
+    <div class="main-content">
+        {% block content %}
+        <!-- Content goes here -->
+        {% endblock %}
+    </div>
 
-  {% endblock content %}
+    <footer>
+        <p>&copy; 2024 Civil Administration System. All rights reserved.</p>
+    </footer>
 </body>
 </html>
