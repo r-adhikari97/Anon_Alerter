@@ -34,10 +34,10 @@
                           <td>{{ complaint.complaint_description }}</td>
                           <td>{{ complaint.complaint_user.name }}</td>
                           <td class="status-column">
-                              {% if complaint.complaint_status %}
-                                  <strong class="resolved">Resolved</strong>
+                              {% if complaint.complaint_isvalid %}
+                                  <strong class="resolved">Is Valid</strong>
                               {% else %}
-                                  <strong class="pending">Pending</strong>
+                                  <strong class="pending">Under Review</strong>
                               {% endif %}
                           </td>
                           <td>

@@ -117,7 +117,7 @@
             <h1>{{ complaint.complaint_title }}</h1>
             <p><strong>Status:</strong>
                 <span class="status-column {% if complaint.complaint_status %}resolved{% else %}pending{% endif %}">
-                    {{ complaint.complaint_status|yesno:"Resolved,Pending" }}
+                    {{ complaint.complaint_isvalid|yesno:"Is Valid, Under Review" }}
                 </span>
             </p>
             <p><strong>Submitted By:</strong> {{ complaint.complaint_user.name }}</p>
@@ -135,9 +135,21 @@
             <p>{{ complaint.complaint_description }}</p>
         </div>
 
+        <!-- Complaint Official -->
+        <div class="complaint-details">
+            <h3>Official Tag</h3>
+            <p>{{ complaint.complaint_official }}</p>
+        </div>
+
+        <!-- Complaint Address -->
+        <div class="complaint-details">
+            <h3>Address</h3>
+            <p>{{ complaint.complaint_address }}</p>
+        </div>
+
         <!-- Back Button -->
         <div class="btn-container">
-            <a href="{% url 'view_official_dashboard' %}" class="btn btn-primary">Back to Complaints</a>
+            <a href="{% url 'view_admin_dashboard' %}" class="btn btn-primary">Back to Complaints</a>
         </div>
     </div>
 </body>

@@ -19,7 +19,7 @@ def create_account(request):
             login(request, user)
             print(f"EMAIL CREATE: {user.email}")
             if user.email == "admin@example.com":
-                return redirect("view_official_dashboard")
+                return redirect("view_admin_dashboard")
             return redirect("complaint-dashboard")
 
     else:
@@ -36,7 +36,7 @@ def login_user(request):
         ## CHECK FOR OFFIFICAL
         print("EMAIL : ",request.user.email)
         if request.user.email == "admin@example.com":
-            return redirect('view_official_dashboard')
+            return redirect('view_admin_dashboard')
         else:
             return redirect('complaint-dashboard')
 
@@ -55,7 +55,7 @@ def login_user(request):
 
                 ## OFFICIAL
                 if email == "admin@example.com":
-                    return redirect('view_official_dashboard')
+                    return redirect('view_admin_dashboard')
                 else:
                     return redirect('complaint-dashboard')
             else:

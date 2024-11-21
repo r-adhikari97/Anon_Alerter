@@ -30,9 +30,10 @@ def create_complaint(request):
 
 @login_required
 def view_complaint_dashboard(request):
-    complaints = PublicComplaint.objects.all()
+    complaints = PublicComplaint.objects.filter(complaint_user__email=request.user.email).order_by('complaint_user__email')
     context = {"complaints":complaints}
     return render(request, "complaints/complaint_dashboard.html",context)
+
 
 
 @login_required
@@ -42,29 +43,31 @@ def view_single_complaint(request, pk):
     return render(request, "complaints/single_complaint.html", context)
 
 
-################# SPECIAL OFFICIAL  #########################
+################# SPECIAL ADMIN  #########################
 @login_required
-def view_official_complaint_dashboard(request):
+def view_admin_complaint_dashboard(request):
     complaints = PublicComplaint.objects.all()
     context = {"complaints":complaints}
-    return render(request, "complaints/official_complaint_dashboard.html",context)
+    return render(request, "complaints/admin_complaint_dashboard.html",context)
+
+
 
 @login_required
-def view_single_official_complaint(request, pk):
+def view_single_admin_complaint(request, pk):
     complaint = PublicComplaint.objects.get(pk=pk)
     context = {"complaint":complaint}
-    return render(request, "complaints/official_single_complaint.html", context)
+    return render(request, "complaints/admin_single_complaint.html", context)
 
 
 
 @login_required
-def update_official_complaint(request, pk):
+def update_admin_complaint_status(request, pk):
     complaint = PublicComplaint.objects.get(pk=pk)
 
     if request.method == "GET":
-        complaint.complaint_status = not complaint.complaint_status
+        complaint.complaint_isvalid = not complaint.complaint_isvalid
         complaint.save()
-        return redirect("view_official_dashboard")
+        return redirect("view_admin_dashboard")
 
     context = {"complaint":complaint}
-    return render(request, "complaints/official_complaint_dashboard.html",context)
+    return render(request, "complaints/admin_complaint_dashboard.html",context)

@@ -128,15 +128,15 @@
                           <td>{{ complaint.complaint_title }}</td>
                           <td>{{ complaint.complaint_user.name }}</td>
                           <td class="status-column">
-                              {% if complaint.complaint_status %}
-                                  <strong class="resolved">Resolved</strong>
+                              {% if complaint.complaint_isvalid %}
+                                  <strong class="resolved">Is Valid</strong>
                               {% else %}
-                                  <strong class="pending">Pending</strong>
+                                  <strong class="pending">Under Review</strong>
                               {% endif %}
                           </td>
                           <td>{{ complaint.complaint_date }}</td>
-                          <td><a href="{% url 'view_single_official_complaint' complaint.complaint_id %}" class="btn-info">View Complaint</a></td>
-                          <td><a href="{% url 'update_official_dashboard' complaint.complaint_id %}" class="btn-info">Update Status</a></td>
+                          <td><a href="{% url 'view_single_admin_complaint' complaint.complaint_id %}" class="btn-info">View Complaint</a></td>
+                          <td><a href="{% url 'update_admin_complaint_status' complaint.complaint_id %}" class="btn-info">Update Status</a></td>
                       </tr>
                   {% empty %}
                       <tr>
